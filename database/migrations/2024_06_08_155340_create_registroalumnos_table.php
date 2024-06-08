@@ -19,6 +19,7 @@ class CreateRegistroalumnosTable extends Migration
             $table->string('Nombre_alumno');
             $table->string('Correo_Institucional');
             $table->integer('Telefono');
+            $table->timestamps();
         });
     }
 

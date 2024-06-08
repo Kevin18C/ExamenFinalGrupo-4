@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ExamenFinalController extends Controller
 {
-    
+
 
     public function create()
     {
@@ -16,17 +16,28 @@ class ExamenFinalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'carnet' => 'required|integer',
-            'nombre_alumno' => 'required|string|max:255',
-            'correo_institucional' => 'required|string|email|max:255|unique:registroalumnos',
-            'telefono' => 'required|integer',
+            'Carnet' => 'required|integer',
+            'Nombre_alumno' => 'required|string|max:255',
+            'Correo_Institucional' => 'required|string|email|max:255|unique:registroalumnos',
+            'Telefono' => 'required|integer',
         ]);
 
-        ExamenFinal::create($request->all());
+        $alumno = new ExamenFinal();
+        $alumno->Carnet = $request->Carnet;
+        $alumno->Nombre_alumno = $request->Nombre_alumno;
+        $alumno->Correo_Institucional = $request->Correo_Institucional;
+        $alumno->Telefono = $request->Telefono;
 
-        return redirect()->route('registroalumnos.index')
-            ->with('success', 'Alumno creado exitosamente.');
+        if ($alumno->save()) {
+            return redirect()->route('welcome')
+                ->with('success', 'Alumno creado exitosamente.');
+        } else {
+            return back()->withInput()
+                ->with('error', 'Error al crear el alumno.');
+        }
     }
+
+
 
     public function show(ExamenFinal $registroalumno)
     {
@@ -39,25 +50,33 @@ class ExamenFinalController extends Controller
     }
 
     public function update(Request $request, ExamenFinal $registroalumno)
-    {
-        $request->validate([
-            'carnet' => 'required|integer',
-            'nombre_alumno' => 'requireed|string|max:255',
-            'correo_institucional' => 'required|string|email|max:255|unique:registroalumnos,correo_institucional,' . $registroalumno->id,
-            'telefono' => 'required|integer',
-        ]);
+{
+    $request->validate([
+        'Carnet' => 'required|integer',
+        'Nombre_alumno' => 'required|string|max:255',
+        'Correo_Institucional' => 'required|string|email|max:255|unique:registroalumnos,correo_institucional,' . $registroalumno->id,
+        'Telefono' => 'required|integer',
+    ]);
 
-        $registroalumno->update($request->all());
+    $registroalumno->Carnet = $request->Carnet;
+    $registroalumno->Nombre_alumno = $request->Nombre_alumno;
+    $registroalumno->Correo_Institucional = $request->Correo_Institucional;
+    $registroalumno->Telefono = $request->Telefono;
 
-        return redirect()->route('registroalumnos.index')
+    if ($registroalumno->save()) {
+        return redirect()->route('welcome')
             ->with('success', 'Alumno actualizado exitosamente.');
+    } else {
+        return back()->with('error', 'Error al actualizar el alumno.');
     }
+}
+
 
     public function destroy(ExamenFinal $registroalumno)
     {
         $registroalumno->delete();
 
-        return redirect()->route('registroalumnos.index')
+        return redirect()->route('welcome')
             ->with('success', 'Alumno eliminado exitosamente.');
     }
 }
