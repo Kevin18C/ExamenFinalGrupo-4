@@ -10,10 +10,11 @@ class ExamenFinal extends Model
     use HasFactory;
 
     protected  $table = "registroalumnos";
+    
     protected $fillable = [
-        'carnet',
-        'nombre_alumno',
-        'correo_institucional',
-        'telefono',
+        'Carnet',
+        'Nombre_alumno',
+        'Correo_Institucional',
+        'Telefono',
     ];
 }

@@ -16,8 +16,8 @@ class CreateRegistroalumnosTable extends Migration
         Schema::create('registroalumnos', function (Blueprint $table) {
             $table->id();
             $table->integer('Carnet');
-            $table->string('Nombre alumno');
-            $table->string('Correo Institucional');
+            $table->string('Nombre_alumno');
+            $table->string('Correo_Institucional');
             $table->integer('Telefono');
         });
     }

@@ -6,11 +6,7 @@ use Illuminate\Http\Request;
 
 class ExamenFinalController extends Controller
 {
-    public function index()
-    {
-        $alumnos = ExamenFinal::all();
-        return view('registroalumnos.index', compact('alumnos'));
-    }
+    
 
     public function create()
     {
@@ -46,7 +42,7 @@ class ExamenFinalController extends Controller
     {
         $request->validate([
             'carnet' => 'required|integer',
-            'nombre_alumno' => 'required|string|max:255',
+            'nombre_alumno' => 'requireed|string|max:255',
             'correo_institucional' => 'required|string|email|max:255|unique:registroalumnos,correo_institucional,' . $registroalumno->id,
             'telefono' => 'required|integer',
         ]);
