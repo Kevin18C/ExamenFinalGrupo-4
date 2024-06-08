@@ -13,11 +13,11 @@ class CreateRegistroalumnosTable extends Migration
      */
     public function up()
     {
-        Schema::create('_registroalumnos', function (Blueprint $table) {
+        Schema::create('registroalumnos', function (Blueprint $table) {
             $table->id();
             $table->integer('Carnet');
             $table->string('Nombre alumno');
-            $table->mail('Correo Institucional');
+            $table->string('Correo Institucional');
             $table->integer('Telefono');
         });
     }
@@ -29,6 +29,6 @@ class CreateRegistroalumnosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_registroalumnos');
+        Schema::dropIfExists('registroalumnos');
     }
 }
